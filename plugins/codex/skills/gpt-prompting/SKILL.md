@@ -1,12 +1,12 @@
 ---
-name: gpt-5-4-prompting
-description: Internal guidance for composing Codex and GPT-5.4 prompts for coding, review, diagnosis, and research tasks inside the Codex Claude Code plugin
+name: gpt-prompting
+description: Internal guidance for composing Codex and GPT-model prompts for coding, review, diagnosis, and research tasks inside the Codex Claude Code plugin
 user-invocable: false
 ---
 
-# GPT-5.4 Prompting
+# GPT Prompting
 
-Use this skill when `codex:codex-rescue` needs to ask Codex or another GPT-5.4-based workflow for help.
+Use this skill when `codex:codex-rescue` needs to ask Codex or another GPT-model workflow for help.
 
 Prompt Codex like an operator, not a collaborator. Keep prompts compact and block-structured with XML tags. State the task, the output contract, the follow-through defaults, and the small set of extra constraints that matter.
 
@@ -29,6 +29,11 @@ When to add blocks:
 - Review or adversarial review: add `grounding_rules`, `structured_output_contract`, and `dig_deeper_nudge`.
 - Research or recommendation tasks: add `research_mode` and `citation_rules`.
 - Write-capable tasks: add `action_safety` so Codex stays narrow and avoids unrelated refactors.
+
+Model selection:
+- Supported model IDs, effort levels, and rollout status live in [references/codex-support-models.md](references/codex-support-models.md). Read it only when the user names a model or effort.
+- If the table's date is older than today, refresh it from the source URL in its notes before relying on it.
+- Leave `--model` and `--effort` unset unless the user explicitly asks for one. When they do, pass the exact ID from the table; if the requested model or effort is missing or marked `unspecified`, say so instead of guessing.
 
 How to choose prompt shape:
 - Use built-in `review` or `adversarial-review` commands when the job is reviewing local git changes. Those prompts already carry the review contract.
